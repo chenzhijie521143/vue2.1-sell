@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-header></v-header>
+    <v-header v-bind:seller="seller"></v-header>
     <div class='tab border-b-1px'>
       <div class='item-tab'>
       	<router-link to="/goods">商品</router-link>
@@ -20,8 +20,25 @@
 
 <script>
 import header from './components/header/header.vue';
+const ERR_OK=0;
 export default {
   name:'App',
+  data () {
+  	return {
+  		seller:{}
+  	};
+  },
+  created (){
+  	this.$http.get('/api/seller').then(response => {
+  		if(response.data.errno===ERR_OK){
+  			this.seller=response.data.data;
+  		}else{
+  			console.log('no data');
+
+  		}
+  		
+  	});
+  },
   components:{
     'v-header':header
   }
@@ -29,7 +46,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "./common/style/mixin.scss";
+  @import "./common/styles/mixin.scss";
   #app{
   	& .tab{
   		display:flex;

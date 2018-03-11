@@ -8,7 +8,7 @@ export default{
   data () {
     return {
       msg: 'i am seller'
-    }
+    };
   }
 };
 </script>

@@ -1,3 +1,8 @@
+body,html{
+    line-height:1;
+    font-weight:200;
+    font-family:'PingFang SC','STHeitiSC-Light','Helvetica-Light',arial,sans-serif;
+}
 @media (-webkit-min-device-pixel-ratio:2),(min-device-pixel-ratio:2){
   .border-b-1px{
      &::after{
