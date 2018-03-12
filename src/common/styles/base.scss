@@ -3,6 +3,17 @@ body,html{
     font-weight:200;
     font-family:'PingFang SC','STHeitiSC-Light','Helvetica-Light',arial,sans-serif;
 }
+.clearfix{
+    display:inline-block;
+    &:after{
+        display:block;
+        content:'';
+        height:0;
+        line-height: 0;
+        clear:both;
+        visibility:hidden;
+    }
+}
 @media (-webkit-min-device-pixel-ratio:2),(min-device-pixel-ratio:2){
   .border-b-1px{
      &::after{

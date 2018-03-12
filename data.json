@@ -3,7 +3,7 @@
     "name": "粥品香坊（回龙观）",
     "description": "蜂鸟专送",
     "deliveryTime": 38,
-    "score": 4.2,
+    "score": 4.6,
     "serviceScore": 4.1,
     "foodScore": 4.3,
     "rankRate": 69.2,
@@ -15,7 +15,7 @@
     "supports": [
       {
         "type": 0,
-        "description": "在线支付满28减5,满50减10"
+        "description": "在线支付满28减5"
       },
       {
         "type": 1,
@@ -27,11 +27,11 @@
       },
       {
         "type": 3,
-        "description": "该商家支持发票,请下单写好发票抬头"
+        "description": "特价饮料八折抢购"
       },
       {
         "type": 4,
-        "description": "已加入“外卖保”计划,食品安全保障"
+        "description": "担任特色套餐"
       }
     ],
     "avatar": "http://static.galileo.xiaojukeji.com/static/tms/seller_avatar_256px.jpg",
