@@ -13,7 +13,7 @@
       </div>
     </div>
     <transition name="fade">
-    	<router-view></router-view>
+    	<router-view v-bind:seller="seller"></router-view>
     </transition>
   </div>
 </template>
@@ -34,7 +34,6 @@ export default {
   			this.seller=response.data.data;
   		}else{
   			console.log('no data');
-
   		}
   		
   	});
@@ -48,16 +47,18 @@ export default {
 <style lang="scss" scoped>
   @import "./common/styles/mixin.scss";
   #app{
-  	& .tab{
+  	 .tab{
   		display:flex;
   		width:100%;
   		height:40px;
   		line-height:40px;
-  		@include border-t-1px(rgba(7,17,27,0.1));
-  		& .item-tab{
+  		font-size:14px;
+  		color:rgb(240,20,20);
+  		@include border-b-1px(rgba(7,17,27,0.1));
+  		.item-tab{
   			flex:1;
   			text-align:center;
-  			& .active{
+  			.active{
   				color:rgb(240,20,20);
   			}
   		}
