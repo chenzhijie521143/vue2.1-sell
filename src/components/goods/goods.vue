@@ -38,12 +38,18 @@
 				</li>
 			</ul>
 		</div>
+	    <shopcart 
+	    	:delivery-price="seller.deliveryPrice"
+	    	:min-price="seller.minPrice"
+	    >
+	    </shopcart>
 	</div>
 </template>
 
 <script>
 	import BScroll from 'better-scroll';
-	const ERR_OK = 0;
+	import shopcart from'../shopcart/shopcart.vue';
+	const ERR_OK = 0; // 返回成功标志
 	export default {
 		data() {
 			return {
@@ -128,6 +134,9 @@
 			  let el=foodList[index];
 			  this.foodsScroll.scrollToElement(el,300);
 			}
+		},
+		components:{
+			shopcart
 		}
 	};
 </script>

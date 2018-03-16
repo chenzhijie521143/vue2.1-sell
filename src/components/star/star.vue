@@ -21,9 +21,11 @@
 			}
 		},
 		computed:{
+			// 星级 类型
 			starType(){
 				return 'star-'+this.size;
 			},
+			// 返回评星 数组
 			itemClasses(){
 				let result=[];
 				let score=Math.floor(this.score * 2)/2;
