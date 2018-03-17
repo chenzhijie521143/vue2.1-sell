@@ -3,13 +3,12 @@
 		<div class="menu-wrapper" ref="menuWrapper">
 			<ul>
 				<li v-for="(item,index) in goods" class="menu-item" 
-					  :class="{'current':currenIndex===index}"
-					  @click="selectMenu(index,$event)"
-				>
+					:class="{'current':currenIndex===index}"
+					@click="selectMenu(index,$event)">
 					<span class="text border-b-1px">
-          	<span v-show="item.type>0" class="icon" :class="classMap[item.type]">
-    	  	  </span>
-    	  	  {{item.name}}
+          	            <span v-show="item.type>0" class="icon" 
+          	            	:class="classMap[item.type]">
+    	  	            </span>{{item.name}}
 					</span>
 				</li>
 			</ul>
@@ -32,6 +31,9 @@
 								<div class="price">
 									<span class="new">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">{{food.oldPrice}}</span>
 								</div>
+							    <div class="cartcontrol-wrapper">
+							    	<cartcontrol :food="food"></cartcontrol>
+							    </div>
 							</div>
 						</li>
 					</ul>
@@ -39,6 +41,7 @@
 			</ul>
 		</div>
 	    <shopcart 
+	    	:select-foods="selectFoods"
 	    	:delivery-price="seller.deliveryPrice"
 	    	:min-price="seller.minPrice"
 	    >
@@ -49,6 +52,7 @@
 <script>
 	import BScroll from 'better-scroll';
 	import shopcart from'../shopcart/shopcart.vue';
+	import cartcontrol from'../cartcontrol/cartcontrol.vue';
 	const ERR_OK = 0; // 返回成功标志
 	export default {
 		data() {
@@ -64,19 +68,30 @@
 			}
 		},
 		computed:{
-			
-			//比较scroll 和 右边分栏高度，返回index
+			// 比较scroll 和 右边分栏高度，返回index
 			currenIndex(){    
 				for(let i=0;i<this.listHeight.length;i++){
 					let height1=this.listHeight[i];
 					let height2=this.listHeight[i+1];
-					//console.log(height1);
-					//console.log(this.scrollY);
+					// console.log(height1);
+					// console.log(this.scrollY);
 					if(!height2 || (this.scrollY>=height1 && this.scrollY<height2)){
 						return i;
 					}
 				}
 				return 0;
+			},
+			// 选择的食物
+			selectFoods(){
+				let foods=[];
+				this.goods.forEach((good) => {
+					good.foods.forEach((food) => {
+						if(food.count){
+							foods.push(food);
+						}
+					});
+				});
+				return foods;
 			}
 		},
 		created() {
@@ -99,10 +114,11 @@
 				let menuWrapper = this.$refs.menuWrapper;
 				let foodsWrapper = this.$refs.menuWrapper;
 				this.menuScroll = new BScroll(this.$refs.menuWrapper, {
-          click:true  // 首先要使点击有效，因为 better-scroll将默认事件都阻止了
+                    click:true  // 首先要使点击有效，因为 better-scroll将默认事件都阻止了
 				});
 				this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
-          probeType:3
+					click:true,
+                    probeType:3
 				});
 				
 				//监控scroll事件，获取滚动高度
@@ -113,30 +129,31 @@
 			//将右边每个分栏的高度存进数组
 			calculateHeight() {
 				let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
-        let height=0;
-        
-        this.listHeight.push(height);
-        for(let i=0;i<foodList.length;i++){
-        	let item =foodList[i];
-        	height += item.clientHeight;
-        	this.listHeight.push(height);
-        }
-        // console.log(this.listHeight);
+		        let height=0;
+		        
+		        this.listHeight.push(height);
+		        for(let i=0;i<foodList.length;i++){
+		        	let item =foodList[i];
+		        	height += item.clientHeight;
+		        	this.listHeight.push(height);
+		        }
+		        // console.log(this.listHeight);
 			},
 			selectMenu(index,$event){
 				//判断是否为pc端，pc端则返回，不做click:true的设置，以免触发两次点击事件
 				// better-scroll 默认会阻止浏览器的原生 click 事件。当设置为 true，better-scroll 会派发一个 click 事件，我们会给派发的 event 参数加一个私有属性 _constructed，值为 true。
-			  if(!event._constructed){
-			  	return;
-			  }
-				// console.log(event);
-				let foodList=this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
-			  let el=foodList[index];
-			  this.foodsScroll.scrollToElement(el,300);
+				if(!event._constructed){
+				  	return;
+				}
+			    // console.log(event);
+			    let foodList=this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
+				let el=foodList[index];
+				this.foodsScroll.scrollToElement(el,300);
 			}
 		},
 		components:{
-			shopcart
+			shopcart,
+			cartcontrol
 		}
 	};
 </script>
@@ -221,7 +238,6 @@
 				@include border-b-1px(rgba(7, 17, 27, 0.1));
 				&:last-child {
 					@include border-1px-none();
-					padding-bottom: 0;
 				}
 				.icon {
 					flex: 0 0 57px;
@@ -266,6 +282,11 @@
 							color: rgb(147, 153, 159);
 							font-weight: 700;
 						}
+					}
+					.cartcontrol-wrapper{
+						position:absolute;
+						right:0;
+						bottom:12px;
 					}
 				}
 			}
