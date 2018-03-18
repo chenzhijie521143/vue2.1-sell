@@ -36,7 +36,8 @@ export default{
 			}else{
 				this.food.count ++;
 			}
-			//console.log(this.food.count);
+			// console.log(this.food.count);
+			this.$emit('add-to-cart',event.target);
 		},
 		//减少数量
 		decreaseCart(event){
@@ -60,7 +61,7 @@ export default{
 		transition: all 0.5s linear;
 		&.move-enter,&.move-leave-to{
 		    opacity:0;
-		    transform:translate3D(24px,0,0);
+		    transform:translate3d(24px,0,0);
 		    .inner{
 		    	transform:rotate(180deg);
 		    }
