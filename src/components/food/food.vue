@@ -38,7 +38,9 @@
 			    		:select-type="selectType"
 			    		:only-content="onlyContent"
 			    		:desc="desc"
-			    		:ratings="food.ratings">
+			    		:ratings="food.ratings"
+			    		@ratingtype-select="changeSelectType"
+			    		@content-toggle="toggleOnlyContent">
 			        </ratingselect>
 			    </div>
 			</div>
@@ -53,9 +55,9 @@
 	import split from'../split/split.vue';
 	import ratingselect from '../ratingselect/ratingselect.vue';
 	
-	const POSITIVE = 0;
-	const NEGATIVE = 1;
-	const ALL = 2;
+	const POSITIVE = 0;  // 推荐
+	const NEGATIVE = 1;  // 吐槽
+	const ALL = 2;  // 全部
 	
 	export default{
 		props:{
@@ -76,10 +78,11 @@
 			};
 		},
 		methods:{
+			// 显示
 			show(){
 				// 初始化
 				this.selectType = ALL;
-				this.onlyContent = true;
+				this.onlyContent = false;
 				
 				this.showFlag = true;
 				this.$nextTick(() => {
@@ -93,6 +96,7 @@
 					
 				});
 			},
+			// 隐藏
 			hide(){
 				this.showFlag=false;
 			},
@@ -104,13 +108,23 @@
 				this.$emit('add-to-cart',event.target);
 				Vue.set(this.food,'count',1);
 			},
+			// 注册事件 实现动画小球
 			addToCart(target){
 				if(!event._constructed){
 				    return;
 			    }
 				this.$emit('add-to-cart',target);
+			},
+			// 改变 selectType
+			changeSelectType(type){
+				this.selectType=type;
+			},
+			// 改变 onlyContent
+			toggleOnlyContent(con){
+				this.onlyContent=con;
 			}
 		},
+		// 注册组件
 		components:{
 			cartcontrol,
 			split,
