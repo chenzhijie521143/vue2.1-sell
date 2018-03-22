@@ -12,9 +12,7 @@
          <router-link to="/seller">商家</router-link>
       </div>
     </div>
-    <transition name="fade">
-    	<router-view v-bind:seller="seller"></router-view>
-    </transition>
+    <router-view v-bind:seller="seller"></router-view>
   </div>
 </template>
 
@@ -35,7 +33,6 @@ export default {
   		}else{
   			console.log('no data');
   		}
-  		
   	});
   },
   components:{
