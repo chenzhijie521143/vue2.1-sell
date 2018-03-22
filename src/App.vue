@@ -18,18 +18,25 @@
 
 <script>
 import header from './components/header/header.vue';
+import {urlParse} from './common/js/util.js';
 const ERR_OK=0;
 export default {
   name:'App',
   data () {
   	return {
-  		seller:{}
+  		seller:{
+  			id: (() => {
+  				let queryParam=urlParse();
+  				return queryParam.id;
+  			})()
+  		}
   	};
   },
   created (){
-  	this.$http.get('/api/seller').then(response => {
+  	this.$http.get('/api/seller?id=' + this.seller.id).then(response => {
   		if(response.data.errno===ERR_OK){
-  			this.seller=response.data.data;
+  			// 用于对象的合并 , Object.assign方法的第一个参数是目标对象，后面的参数都是源对象。
+  			this.seller=Object.assign({},this.seller,response.data.data);
   		}else{
   			console.log('no data');
   		}

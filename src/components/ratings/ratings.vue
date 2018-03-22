@@ -35,7 +35,7 @@
       <div class="rating-wrapper">
       	<ul>
       		<li v-for="rating in ratings" 
-      			class="rating-item"
+      			class="rating-item border-b-1px"
       			v-show="needShow(rating.rateType,rating.text)">
       			<div class="avatar">
       				<img width="28" height="28" :src="rating.avatar">
