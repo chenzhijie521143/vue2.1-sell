@@ -78,8 +78,11 @@ import {saveToLocal,loadFromLocal} from '../../common/js/store.js';
 export default{
 	data(){
 		return{
-			favorite:false
-		}
+			// localStorage
+			favorite:(() => {
+				return loadFromLocal(this.seller.id,'favorite',false);
+			})()
+		};
 	},
   props:{
 	 	seller:{
@@ -117,7 +120,6 @@ export default{
 			}
 			this.favorite = !this.favorite;
 			saveToLocal(this.seller.id, 'favorite', this.favorite);
-			console.log(window.localStorage.__seller__);
 		},
 		// 初始化 better-scroll
 		_initScroll(){

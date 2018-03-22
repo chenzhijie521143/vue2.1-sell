@@ -12,7 +12,9 @@
          <router-link to="/seller">商家</router-link>
       </div>
     </div>
-    <router-view v-bind:seller="seller"></router-view>
+    <keep-alive>
+    	<router-view v-bind:seller="seller"></router-view>
+    </keep-alive>
   </div>
 </template>
 
