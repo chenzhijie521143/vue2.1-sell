@@ -8,7 +8,7 @@ git clone git@github.com:chenzhijie521143/vue2.1-sell.git
 ```
 npm install 
 ```
-### 3. 项目运行
+### 3. 启动服务( [localhost:8000](localhost:8000) )
 ```
 npm run dev
 ```
