@@ -68,6 +68,7 @@ import star from '../star/star.vue';
 import split from'../split/split.vue';
 import ratingselect from '../ratingselect/ratingselect.vue';
 import {formatDate} from '../../common/js/date.js';
+import data from '../../common/json/data.json';
 
 const POSITIVE = 0;
 const NEGATIVE = 1;
@@ -125,18 +126,26 @@ export default{
 	},
 	// 获取ratings数据
   created(){
-  	this.$http.get('/api/ratings').then((response) => {
-  		if(response.data.errno === ERR_OK) {
-					this.ratings = response.data.data;
-					this.$nextTick(() => {
-            this.scroll = new BScroll(this.$refs.ratings, {
-              click: true
-            });
+// 	 this.$http.get('/api/ratings').then((response) => {
+//		if(response.data.errno === ERR_OK) {
+//					this.ratings = response.data.data;
+//					this.$nextTick(() => {
+//          this.scroll = new BScroll(this.$refs.ratings, {
+//            click: true
+//          });
+//        });
+//			} else {
+//				console.log('no data');
+//			}
+	    
+//  });
+  	this.ratings=data.ratings;
+  	this.$nextTick(() => {
+          this.scroll = new BScroll(this.$refs.ratings, {
+            click: true
           });
-			} else {
-				console.log('no data');
-			}
-  	});
+    });
+	   
   },
   components:{
   	star,
