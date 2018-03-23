@@ -1,3 +1,14 @@
+# 本项目是基于vue2的实战项目
+## 项目所用技术
+* vue-cli
+* vue
+* vue-resource
+* vue-router
+* better-scroll
+* es6
+* sass
+* webpack
+
 # vue2.0-sell
 ## [项目演示地址](https://chenzhijie521143.github.io/vue2.1-sell/index.html#/goods)
 ### 1. 下载项目到本地
