@@ -11,6 +11,8 @@
 
 # vue2.0-sell
 ## [项目演示地址](https://chenzhijie521143.github.io/vue2.1-sell/index.html#/goods)
+## 手机扫二维码
+![avatar](https://github.com/chenzhijie521143/vue2.1-sell/blob/gh-pages/static/demo.png)
 ### 1. 下载项目到本地
 ```
 git clone git@github.com:chenzhijie521143/vue2.1-sell.git
