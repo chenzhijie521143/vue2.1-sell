@@ -21,7 +21,7 @@
 <script>
 import header from './components/header/header.vue';
 import {urlParse} from './common/js/util.js';
-import data from './common/json/data.json';
+// import data from './common/json/data.json';
 const ERR_OK=0;
 export default {
   name:'App',
@@ -36,15 +36,15 @@ export default {
   	};
   },
   created (){
-//	this.$http.get('/api/seller?id=' + this.seller.id).then(response => {
-//		if(response.data.errno===ERR_OK){
-//			// 用于对象的合并 , Object.assign方法的第一个参数是目标对象，后面的参数都是源对象。
-//			this.seller=Object.assign({},this.seller,response.data.data);
-//		}else{
-//			console.log('no data');
-//		}
-//	});
-    this.seller=Object.assign({},this.seller,data.seller);
+		this.$http.get('/api/seller?id=' + this.seller.id).then(response => {
+			if(response.data.errno===ERR_OK){
+				// 用于对象的合并 , Object.assign方法的第一个参数是目标对象，后面的参数都是源对象。
+				this.seller=Object.assign({},this.seller,response.data.data);
+			}else{
+				console.log('no data');
+			}
+		});
+    // this.seller=Object.assign({},this.seller,data.seller);
   },
   components:{
     'v-header':header

@@ -58,7 +58,7 @@
 	import shopcart from'../shopcart/shopcart.vue';
 	import cartcontrol from'../cartcontrol/cartcontrol.vue';
 	import food from'../food/food.vue';
-	import data from '../../common/json/data.json';
+	// import data from '../../common/json/data.json';
 	const ERR_OK = 0; // 返回成功标志
 	export default {
 		data() {
@@ -103,22 +103,22 @@
 		},
 		created() {
 			this.classMap = ['decrease', 'discount', 'guarantee', 'invoice', 'special'];
-//			this.$http.get('/api/goods').then(response => {
-//				if(response.data.errno === ERR_OK) {
-//					this.goods = response.data.data;
-//					this.$nextTick(() => {
-//						this.initScroll();
-//						this.calculateHeight();
-//					});
-//				} else {
-//					console.log('no data');
-//				}
-//			});
-            this.goods=data.goods;
-            this.$nextTick(() => {
-				this.initScroll();
-				this.calculateHeight();
+			this.$http.get('/api/goods').then(response => {
+				if(response.data.errno === ERR_OK) {
+					this.goods = response.data.data;
+					this.$nextTick(() => {
+						this.initScroll();
+						this.calculateHeight();
+					});
+				} else {
+					console.log('no data');
+				}
 			});
+//          this.goods=data.goods;
+//          this.$nextTick(() => {
+//				this.initScroll();
+//				this.calculateHeight();
+//			});
 		},
 		methods: {
 			initScroll() {
